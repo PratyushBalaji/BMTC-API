@@ -1,9 +1,9 @@
 
 # BMTC Public API Documentation
 
-This document summarises the publicly accessible BMTC APIs reverse-engineered from analysing network traffic on [the BMTC website](https://nammabmtcapp.karnataka.gov.in/commuter/dashboard).
+This is work-in-progress documentation for the publicly accessible BMTC APIs. I've tried to reverse-engineer it by analysing network traffic on [the BMTC website](https://nammabmtcapp.karnataka.gov.in/commuter/dashboard).
 
-Made with the help of the [Bruno API Client](https://www.usebruno.com/) and [existing documentation](https://nimmbus.netlify.app/) (outdated) by seadeep42 and Vonter on GitHub
+Made with the help of the [Bruno API Client](https://www.usebruno.com/) and [existing documentation](https://nimmbus.netlify.app/) by seadeep42 and Vonter on GitHub
 
 ---
 
