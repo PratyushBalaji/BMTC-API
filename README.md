@@ -35,8 +35,8 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and [exi
 
 **Headers :**
 ```http
-Content-Type : application/json
-lan : en
+Content-Type: application/json
+lan: en
 ```
 
 **Body :**
@@ -58,8 +58,8 @@ Response is JSON containing an array `data` with entries for bus routes with `ro
 
 **Headers :**
 ```http
-lan : en
-deviceType : WEB
+lan: en
+deviceType: WEB
 ```
 
 **Body :**
@@ -117,13 +117,13 @@ Corresponding fields (Different for each entry)
 
 ## 3. 📍 Find Bus Stop by Name
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/FindNearByBusStop_v2`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/FindNearByBusStop_v2`
 
 **Headers :**
 ```http
-Accept : text/plain
-lan : en
-Content-Type : application/json
+Accept: text/plain
+lan: en
+Content-Type: application/json
 ```
 
 **Body :**
@@ -139,13 +139,13 @@ Content-Type : application/json
 
 ## 4. 🏪 Facilities Around Stations
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal`
 
 **Body :**
 ```json
 {
-  "deviceType" : "WEB",
-  "lan" : "en"
+  "deviceType": "WEB",
+  "lan": "en"
 }
 ```
 
@@ -155,12 +155,12 @@ Content-Type : application/json
 
 ## 5. 🧭 Route Points
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints`
 
 **Body :**
 ```json
 {
-  "routeid" : 1732
+  "routeid": 1732
 }
 ```
 
@@ -170,14 +170,14 @@ Content-Type : application/json
 
 ## 6. 🚐 List Vehicles by Substring
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
 
 **Headers :**
 ```http
-lan : en
-deviceType : WEB
-Content-Type : application/json
-Accept : text/plain
+lan: en
+deviceType: WEB
+Content-Type: application/json
+Accept: text/plain
 ```
 
 **Body :**
@@ -195,12 +195,12 @@ Accept : text/plain
 
 ## 7. 📡 Live Track Vehicle
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
 
 **Body :**
 ```json
 {
-  "vehicleId" : 19285
+  "vehicleId": 19285
 }
 ```
 
@@ -210,21 +210,21 @@ Accept : text/plain
 
 ## 8. 💰 Get Fare Routes
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
 
 **Headers :**
 ```http
-Accept : application/json, text/plain, */*
-lan : English
-Content-Type : application/json
+Accept: application/json, text/plain, */*
+lan: English
+Content-Type: application/json
 ```
 
 **Body :**
 ```json
 {
-  "fromStationId" : 38642,
-  "toStationId" : 38888,
-  "lan" : "English"
+  "fromStationId": 38642,
+  "toStationId": 38888,
+  "lan": "English"
 }
 ```
 
@@ -234,22 +234,22 @@ Content-Type : application/json
 
 ## 9. 💸 Get Fare Data
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
 
 **Headers :**
 ```http
-lan : en
+lan: en
 ```
 
 **Body :**
 ```json
 {
-  "routeno" : "335-E",
-  "routeid" : 1701,
-  "route_direction" : "Down",
-  "source_code" : "KDB-1",
-  "destination_code" : "KBS3"
+  "routeno": "335-E",
+  "routeid": 1701,
+  "route_direction": "Down",
+  "source_code": "KDB-1",
+  "destination_code": "KBS3"
 }
 ```
 
-**Description :** Returns fare data and stage list for a given route and stop codes.
+**Description :** Returns fare amount and service type for a given route and stop codes.
