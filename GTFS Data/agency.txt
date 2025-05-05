@@ -1,0 +1,2 @@
+agency_fare_url,agency_id,agency_lang,agency_name,agency_phone,agency_timezone,agency_url
+,BMTC,,Bangalore Metropolitan Transport Corporation,,Asia/Kolkata,https://www.mybmtc.com,
