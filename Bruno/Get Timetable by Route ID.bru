@@ -1,0 +1,32 @@
+meta {
+  name: Get Timetable by Route ID
+  type: http
+  seq: 16
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetTimetableByRouteId_v3
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "current_date": "2025-05-05T18:30:00.000Z",
+    "routeid": 1856,
+    "fromStationId": 20902,
+    "toStationId": 20922,
+    "starttime": "2025-05-05 15:46",
+    "endtime": "2025-05-05 23:59"
+  }
+}
+
+docs {
+  Returns timetable for a given route id
+}

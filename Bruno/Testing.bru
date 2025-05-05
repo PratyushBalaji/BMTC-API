@@ -1,0 +1,21 @@
+meta {
+  name: Testing
+  type: http
+  seq: 14
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/UpdateVehicleData_v1
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+}
+
+body:json {
+  {"vehicleId": 19285}
+}

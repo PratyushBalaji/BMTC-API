@@ -1,0 +1,38 @@
+meta {
+  name: Find Stations by Route
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchByRouteDetails_v4
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  deviceType: WEB
+  ~Origin: https://bmtckiosk.karnataka.gov.in
+  ~DNT: 1
+  ~Connection: keep-alive
+  ~Sec-GPC: 1
+  ~Sec-Fetch-Dest: empty
+  ~Sec-Fetch-Mode: cors
+  ~Sec-Fetch-Site: same-site
+  ~Priority: u=0
+  ~Host: bmtcmobileapi.karnataka.gov.in
+  ~User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0
+  ~Accept: application/json, text/plain, */*
+  ~Referer: https://bmtckiosk.karnataka.gov.in/
+  ~Accept-Encoding: gzip, deflate, br, zstd
+  ~Accept-Language: en-US,en;q=0.5
+  ~Content-Type: application/json
+}
+
+body:json {
+  {
+    "routeid": 1700,
+    "servicetypeid": 0 // 73 = AC, 74 = Non Ac
+  }
+}

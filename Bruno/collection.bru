@@ -1,0 +1,107 @@
+docs {
+  # BMTC API Reverse-Engineering
+  
+  [BMTC website to live track routes](https://bmtckiosk.karnataka.gov.in/commuter/search-by-route)
+  
+  ## All API Calls
+  - SearchRoute_v2
+  - SearchByRouteDetails_v4
+  - ListVehicles
+  - VehicleTripDetails_v2
+  - FindNearByBusStop_v2
+  - AroundBusStops_v2_Webportal
+  - GetFareRoutes
+  - GetMobileFareData_v2
+  - GetTimetableByStation_v4
+  - GetTimetableByRouteid_v3
+  - GetMapConfig
+  
+  
+  ## POST Requests
+  
+  ### 1) Search Routes Matching Text
+  
+  URI : `https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchRoute_v2`
+  
+  Description : 
+  Takes a string and returns all bus routes where the route number contains that string. Used for suggesting options to autocomplete a search.
+  
+  Required Headers : 
+  - `ContentType:application/json` - Body Content Type
+  - `lan:en` - Language
+  
+  Body : 
+  ```
+  {
+    "routetext": "<text>"
+  }
+  ```
+  
+  Example Responses : 
+  
+  `"routetext":"MF-23E"`
+  ```
+  {
+    "data": [
+      {
+        "union_rowno": 2,
+        "row": 1,
+        "routeno": "MF-23E",
+        "responsecode": 200,
+        "routeparentid": 6660
+      },
+      {
+        "union_rowno": 2,
+        "row": 3,
+        "routeno": "MF-23E D45-JHMS",
+        "responsecode": 200,
+        "routeparentid": 6663
+      },
+      {
+        "union_rowno": 2,
+        "row": 5,
+        "routeno": "MF-23E MSP-LGR",
+        "responsecode": 200,
+        "routeparentid": 6674
+      }
+    ],
+    "Message": "Success",
+    "Issuccess": true,
+    "exception": null,
+    "RowCount": 3,
+    "responsecode": 200
+  }
+  ```
+  
+  `"routetext":"unmatched_substring"`
+  ```
+  {
+    "data": [],
+    "Message": "No Records Found",
+    "Issuccess": true,
+    "exception": null,
+    "RowCount": 0,
+    "responsecode": 200
+  }
+  ```
+  
+  ### 2) Find Stations by Route ID
+  
+  URI : `https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchByRouteDetails_v4`
+  
+  Description : 
+  Takes in a particular bus route's `routeparentid` and returns
+  
+  Required Headers : 
+  - `ContentType:application/json` - Body Content Type
+  - `lan:en` - Language
+  
+  Body : 
+  ```
+  {
+    "routetext": "<text>"
+  }
+  ```
+  
+  Example Responses : 
+}

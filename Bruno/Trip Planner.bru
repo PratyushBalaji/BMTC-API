@@ -1,0 +1,32 @@
+meta {
+  name: Trip Planner
+  type: http
+  seq: 13
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/TripPlannerMSMD
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "fromStationId": 38391,
+    "toStationId": 20635,
+    "filterBy": 0,
+    "serviceTypeId": null,
+    "fromDateTime": null,
+    "lan": "en"
+  }
+}
+
+docs {
+  Trip Planner (Currently not working)
+}

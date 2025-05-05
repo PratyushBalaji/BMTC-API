@@ -1,0 +1,21 @@
+meta {
+  name: Route Points
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "routeid": 1732
+  }
+}
+
+docs {
+  Returns lat and long data in an array for stations corresponding to `SearchByRouteDetails_v4`
+}

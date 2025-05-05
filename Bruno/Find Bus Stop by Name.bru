@@ -1,0 +1,27 @@
+meta {
+  name: Find Bus Stop by Name
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/FindNearByBusStop_v2
+  body: json
+  auth: inherit
+}
+
+headers {
+  Accept: text/plain
+  lan: en
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "stationName": "indirana"
+  }
+}
+
+docs {
+  Finds bus stops containing search string
+}

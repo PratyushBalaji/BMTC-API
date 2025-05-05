@@ -1,0 +1,22 @@
+meta {
+  name: Get Helpline Data
+  type: http
+  seq: 11
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetHelplineData
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "lan": "en",
+    "deviceType": ""
+  }
+}
+
+docs {
+  Returns the BMTC helpline number
+}

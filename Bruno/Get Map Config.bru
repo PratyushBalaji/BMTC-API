@@ -1,0 +1,21 @@
+meta {
+  name: Get Map Config
+  type: http
+  seq: 17
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMapConfig
+  body: none
+  auth: inherit
+}
+
+headers {
+  lan: en
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+}
+
+docs {
+  Returns google maps api key
+}

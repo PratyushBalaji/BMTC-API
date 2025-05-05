@@ -1,0 +1,22 @@
+meta {
+  name: Facilities Around Stations
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "deviceType": "WEB",
+    "lan": "en"
+  }
+}
+
+docs {
+  Return facilities around different stations with coordinate data
+}

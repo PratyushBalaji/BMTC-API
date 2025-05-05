@@ -1,0 +1,32 @@
+meta {
+  name: Get Fare Data
+  type: http
+  seq: 10
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  ~Accept: application/json, text/plain, */*
+  ~Content-Type: application/json
+  ~deviceType: WEB
+}
+
+body:json {
+  {
+    "routeno": "335-E",
+    "routeid": 1701,
+    "route_direction": "Down",
+    "source_code": "KDB-1",
+    "destination_code": "KBS3"
+  }
+}
+
+docs {
+  Finds fare between bus stops for a particular route given source, destination, and bus route code
+}

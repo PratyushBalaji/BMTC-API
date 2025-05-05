@@ -1,0 +1,21 @@
+meta {
+  name: Live Track Vehicle
+  type: http
+  seq: 8
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "vehicleId": 19285
+  }
+}
+
+docs {
+  Live track a bus from a given vehicle id
+}

@@ -1,0 +1,33 @@
+meta {
+  name: Get Timetable by Station
+  type: http
+  seq: 15
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetTimetableByStation_v4
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "fromStationId": 37509,
+    "toStationId": 21161,
+    "p_startdate": "2025-05-05 15:46",
+    "p_enddate": "2025-05-05 23:59",
+    "p_isshortesttime": 2,
+    "p_routeid": "",
+    "p_date": "2025-05-05 15:46"
+  }
+}
+
+docs {
+  Returns timetable for buses between 2 stations
+}

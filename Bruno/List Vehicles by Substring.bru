@@ -1,0 +1,30 @@
+meta {
+  name: List Vehicles by Substring
+  type: http
+  seq: 7
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles
+  body: json
+  auth: inherit
+}
+
+headers {
+  lan: en
+  deviceType: WEB
+  Content-Type: application/json
+  Accept: text/plain
+}
+
+body:json {
+  {
+    "vehicleRegNo": "KA57F2201",
+    "deviceType": "WEB",
+    "lan":"en"
+  }
+}
+
+docs {
+  Find vehicles with registration containing search string
+}

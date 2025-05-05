@@ -1,0 +1,29 @@
+meta {
+  name: Get Fare Routes
+  type: http
+  seq: 9
+}
+
+post {
+  url: https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes
+  body: json
+  auth: inherit
+}
+
+headers {
+  Accept: application/json, text/plain, */*
+  Content-Type: application/json
+  lan: English
+}
+
+body:json {
+  {
+    "fromStationId": 38642,
+    "toStationId": 38888,
+    "lan": "English"
+  }
+}
+
+docs {
+  Finds bus routes that travel from `fromStationId` to `toStationId`
+}
