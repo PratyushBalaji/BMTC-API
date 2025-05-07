@@ -1,9 +1,9 @@
 
 # BMTC Public API Documentation
 
-This document summarises the publicly accessible BMTC APIs reverse-engineered from analysing network traffic on [the BMTC website](https://nammabmtcapp.karnataka.gov.in/commuter/dashboard).
+This is work-in-progress documentation for the publicly accessible BMTC APIs. I've tried to reverse-engineer it by analysing network traffic on [the BMTC website](https://nammabmtcapp.karnataka.gov.in/commuter/dashboard).
 
-Made with the help of the [Bruno API Client](https://www.usebruno.com/) and [existing documentation](https://nimmbus.netlify.app/) (outdated) by seadeep42 and Vonter on GitHub
+Made with the help of the [Bruno API Client](https://www.usebruno.com/) and existing documentation([Swagger](https://nimmbus.netlify.app/), [GitHub](https://github.com/Vonter/open-bmtc)) by seadeep42 and Vonter on GitHub
 
 ---
 
@@ -243,14 +243,14 @@ Content-Type: application/json
 
 ## 6. 🚐 List Vehicles by Substring
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
 
 **Headers :**
 ```http
-lan : en
-deviceType : WEB
-Content-Type : application/json
-Accept : text/plain
+lan: en
+deviceType: WEB
+Content-Type: application/json
+Accept: text/plain
 ```
 
 **Body :**
@@ -268,12 +268,12 @@ Accept : text/plain
 
 ## 7. 📡 Live Track Vehicle
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
 
 **Body :**
 ```json
 {
-  "vehicleId" : 19285
+  "vehicleId": 19285
 }
 ```
 
@@ -283,21 +283,21 @@ Accept : text/plain
 
 ## 8. 💰 Get Fare Routes
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
 
 **Headers :**
 ```http
-Accept : application/json, text/plain, */*
-lan : English
-Content-Type : application/json
+Accept: application/json, text/plain, */*
+lan: English
+Content-Type: application/json
 ```
 
 **Body :**
 ```json
 {
-  "fromStationId" : 38642,
-  "toStationId" : 38888,
-  "lan" : "English"
+  "fromStationId": 38642,
+  "toStationId": 38888,
+  "lan": "English"
 }
 ```
 
@@ -307,22 +307,22 @@ Content-Type : application/json
 
 ## 9. 💸 Get Fare Data
 
-**POST** `https ://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
 
 **Headers :**
 ```http
-lan : en
+lan: en
 ```
 
 **Body :**
 ```json
 {
-  "routeno" : "335-E",
-  "routeid" : 1701,
-  "route_direction" : "Down",
-  "source_code" : "KDB-1",
-  "destination_code" : "KBS3"
+  "routeno": "335-E",
+  "routeid": 1701,
+  "route_direction": "Down",
+  "source_code": "KDB-1",
+  "destination_code": "KBS3"
 }
 ```
 
-**Description :** Returns fare data and stage list for a given route and stop codes.
+**Description :** Returns fare amount and service type for a given route and stop codes.
