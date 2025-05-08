@@ -12,10 +12,12 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
 **Base URL :** `https://bmtcmobileapi.karnataka.gov.in/WebAPI`
 
 **API routes :** 
-- **Static**
+- **Search Functionality**
   - `/SearchRoute_v2`
-  - `/ListVehicles`
   - `/FindNearByBusStop_v2`
+  - `/ListVehicles`
+- **Static**
+  - `/RoutePoints`
   - `/AroundBusStops_v2_Webportal`
   - `/GetFareRoutes`
   - `/GetMobileFareData_v2`
@@ -29,7 +31,9 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
 
 ---
 
-## 1. 🔍 Search Routes
+## Search Functionality
+
+### 1. 🔍 Search Routes
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchRoute_v2`
 
@@ -71,7 +75,298 @@ lan: en
 
 ---
 
-## 2. 🚏 Find Stations by Route
+### 2. 🔍 Search Bus Stops
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/FindNearByBusStop_v2`
+
+**Headers :**
+```http
+Accept: text/plain
+lan: en
+Content-Type: application/json
+```
+
+**Body :**
+```
+{
+  "stationName": "<input text>"
+}
+```
+
+**Description :** Search for stops containing a substring.
+
+**Response :** JSON containing `data` array with entries for bus stops with `stationName` as a substring.
+
+```
+{
+  "data": [
+    {
+      "srno": <int>,
+      "routeno": "",
+      "routeid": <int>, // idk what this number even is
+      "center_lat": 0,
+      "center_lon": 0,
+      "responsecode": <int>,
+      "routetypeid": "2",
+      "routename": "<string", // station name
+      "route": ""
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 3. 🔍 Search Buses
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
+
+**Headers :**
+```http
+lan: en
+deviceType: WEB
+Content-Type: application/json
+Accept: text/plain
+```
+
+**Body :**
+```
+{
+  "vehicleRegNo" : <input text>, // vehicle license plate
+  "deviceType" : "WEB"
+}
+```
+
+**Description :** Finds vehicles whose license plate contains the input text. Used for search autocomplete functionality.
+
+**Response :** JSON containing `data` array with entries for buses with `vehicleRegNo` as a substring of their license plate.
+
+```
+{
+  "data": [
+    {
+      "vehicleid": <int>, // vehicle identifier
+      "vehicleregno": <string>, // full license plate
+      "responsecode": <int>
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+## Static
+
+### 1. 🧭 Route Points
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints`
+
+**Body :**
+```
+{
+  "routeid": <int> // routeid here is the routeparentid returned from a /SearchRoute_v2 request
+}
+```
+
+**Description :** Returns lat and long data for stations on a bus route, in an order corresponding to `SearchByRouteDetails_v4`. `routeid` is unique for the up and down line, so this data is unambiguous.
+
+**Response :** 
+
+```
+{
+  "data": [
+    {
+      "latitude": <string>,
+      "longitude": <string>,
+      "responsecode": <int>
+    },
+    ...
+  ]
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 2. 🏪 Facilities Around Stations
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal`
+
+**Body :**
+```
+{
+  "deviceType": "WEB",
+  "lan": <string> // one of "en" or "kd"
+}
+```
+
+**Description :** Returns nearby facilities for stations.
+
+**Response :** JSON containing
+
+```
+{
+  "data": [
+    {
+      "stationname": <string>,
+      "distance": <string>,
+      "Arounds": [ // facilities around particular station
+        {
+          "type": <string>, // ATM, Hotel, Parking, etc
+          "typeid": <string>, // identifier for the facility type
+          "icon": <string>, // icon from https://bmtcmobileapi.karnataka.gov.in/StaticFiles/
+          "list": [ // list of facilities of this type near particular station
+            {
+              "name": <string>,
+              "latitude": <string>,
+              "longitude": <string>,
+              "distance": <string>
+            }
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+
+### 3. 💰 Get Fare Routes
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
+
+**Headers :**
+```http
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+```
+
+**Body :**
+```
+{
+  "fromStationId": <int>,
+  "toStationId": <int>
+}
+```
+
+**Description :** Returns all fare routes between two station IDs.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "id": <int>,
+      "fromstationid": <int>, // id of this specific route, not from body
+      "source_code": <string>,
+      "from_displayname": <string>,
+      "tostationid": <int>, // again id of this route, not from body
+      "destination_code": <string>,
+      "to_displayname": <string>,
+      "fromdistance": <float>,
+      "todistance": <float>,
+      "routeid": <int>, // this is the new id from /SearchByRouteDetails_v4
+      "routeno": <string>,
+      "routename": <string>, // origin and terminus shortcode (Ex : KIA-KDG)
+      "route_direction": <string>, // one of "Up" or "Down"
+      "fromstationname": <string>,
+      "tostationname": <string>
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 4. 💸 Get Fare Data
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
+
+**Headers :**
+```http
+lan: en
+```
+
+**Body :**
+```
+{
+  "routeno": <string>,
+  "routeid": <int>, // new routeid from /SearchByRouteId_v4
+  "route_direction": <string>, // "Up" or "Down" (Must match routeid)
+  "source_code": <string>,
+  "destination_code": <string>
+}
+```
+
+**Description :** Returns fare amount and service type for a given route and stop codes.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "servicetype": <string>, // NOT AC/Non AC, but instead the route type (Ex : "Bengaluru Sarige")
+      "fare": <string> // fare amount in rupees
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 5. `/GetTimetableByStation_v4`
+
+---
+
+### 6. `/GetTimetableByRouteid_v3`
+
+---
+
+### 7. `/GetMapConfig`
+
+---
+
+## Live
+
+### 1. 🚏 Find Stations by Route
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchByRouteDetails_v4`
 
@@ -161,183 +456,7 @@ deviceType: WEB
 
 ---
 
-## 3. 📍 Find Bus Stop by Name
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/FindNearByBusStop_v2`
-
-**Headers :**
-```http
-Accept: text/plain
-lan: en
-Content-Type: application/json
-```
-
-**Body :**
-```
-{
-  "stationName": "<input text>"
-}
-```
-
-**Description :** Search for stops containing a substring.
-
-**Response :** JSON containing `data` array with entries for bus stops with `stationName` as a substring.
-
-```
-{
-  "data": [
-    {
-      "srno": <int>,
-      "routeno": "",
-      "routeid": <int>, // idk what this number even is
-      "center_lat": 0,
-      "center_lon": 0,
-      "responsecode": <int>,
-      "routetypeid": "2",
-      "routename": "<string", // station name
-      "route": ""
-    },
-    ...
-  ],
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
----
-
-## 4. 🏪 Facilities Around Stations
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal`
-
-**Body :**
-```
-{
-  "deviceType": "WEB",
-  "lan": <string> // one of "en" or "kd"
-}
-```
-
-**Description :** Returns nearby facilities for stations.
-
-**Response :** JSON containing
-
-```
-{
-  "data": [
-    {
-      "stationname": <string>,
-      "distance": <string>,
-      "Arounds": [ // facilities around particular station
-        {
-          "type": <string>, // ATM, Hotel, Parking, etc
-          "typeid": <string>, // identifier for the facility type
-          "icon": <string>, // icon from https://bmtcmobileapi.karnataka.gov.in/StaticFiles/
-          "list": [ // list of facilities of this type near particular station
-            {
-              "name": <string>,
-              "latitude": <string>,
-              "longitude": <string>,
-              "distance": <string>
-            }
-          ]
-        },
-        ...
-      ]
-    },
-    ...
-  ]
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
-
----
-
-## 5. 🧭 Route Points
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints`
-
-**Body :**
-```
-{
-  "routeid": <int> // routeid here is the routeparentid returned from a /SearchRoute_v2 request
-}
-```
-
-**Description :** Returns lat and long data for stations on a bus route, in an order corresponding to `SearchByRouteDetails_v4`. `routeid` is unique for the up and down line, so this data is unambiguous.
-
-**Response :** 
-
-```
-{
-  "data": [
-    {
-      "latitude": <string>,
-      "longitude": <string>,
-      "responsecode": <int>
-    },
-    ...
-  ]
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
----
-
-## 6. 🚐 List Vehicles by Substring
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/ListVehicles`
-
-**Headers :**
-```http
-lan: en
-deviceType: WEB
-Content-Type: application/json
-Accept: text/plain
-```
-
-**Body :**
-```
-{
-  "vehicleRegNo" : <input text>, // vehicle license plate
-  "deviceType" : "WEB"
-}
-```
-
-**Description :** Finds vehicles whose license plate contains the input text. Used for search autocomplete functionality.
-
-**Response :** JSON containing `data` array with entries for buses with `vehicleRegNo` as a substring of their license plate.
-
-```
-{
-  "data": [
-    {
-      "vehicleid": <int>, // vehicle identifier
-      "vehicleregno": <string>, // full license plate
-      "responsecode": <int>
-    },
-    ...
-  ],
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
-
----
-
-## 7. 📡 Live Track Vehicle
+### 2. 📡 Live Track Vehicle
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
 
@@ -431,96 +550,6 @@ Accept: text/plain
 
 ---
 
-## 8. 💰 Get Fare Routes
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
-
-**Headers :**
-```http
-Accept: application/json, text/plain, */*
-Content-Type: application/json
-```
-
-**Body :**
-```
-{
-  "fromStationId": <int>,
-  "toStationId": <int>
-}
-```
-
-**Description :** Returns all fare routes between two station IDs.
-
-**Response :**
-
-```
-{
-  "data": [
-    {
-      "id": <int>,
-      "fromstationid": <int>, // id of this specific route, not from body
-      "source_code": <string>,
-      "from_displayname": <string>,
-      "tostationid": <int>, // again id of this route, not from body
-      "destination_code": <string>,
-      "to_displayname": <string>,
-      "fromdistance": <float>,
-      "todistance": <float>,
-      "routeid": <int>, // this is the new id from /SearchByRouteDetails_v4
-      "routeno": <string>,
-      "routename": <string>, // origin and terminus shortcode (Ex : KIA-KDG)
-      "route_direction": <string>, // one of "Up" or "Down"
-      "fromstationname": <string>,
-      "tostationname": <string>
-    },
-    ...
-  ],
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
+### 3. `/TripPlannerMSMD`
 
 ---
-
-## 9. 💸 Get Fare Data
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
-
-**Headers :**
-```http
-lan: en
-```
-
-**Body :**
-```
-{
-  "routeno": <string>,
-  "routeid": <int>, // new routeid from /SearchByRouteId_v4
-  "route_direction": <string>, // "Up" or "Down" (Must match routeid)
-  "source_code": <string>,
-  "destination_code": <string>
-}
-```
-
-**Description :** Returns fare amount and service type for a given route and stop codes.
-
-**Response :**
-
-```
-{
-  "data": [
-    {
-      "servicetype": <string>, // NOT AC/Non AC, but instead the route type (Ex : "Bengaluru Sarige")
-      "fare": <string> // fare amount in rupees
-    }
-  ],
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
