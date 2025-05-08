@@ -19,11 +19,14 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
 - [**Static**](#static)
   - `/RoutePoints`
   - `/AroundBusStops_v2_Webportal`
+  - `/GetAllRouteList`
   - `/GetFareRoutes`
   - `/GetMobileFareData_v2`
   - `/GetTimetableByStation_v4`
   - `/GetTimetableByRouteid_v3`
   - `/GetMapConfig`
+  - `/GetAllServiceTypes`
+  - `/GetHelplineData`
 - [**Live**](#live)
   - `/SearchByRouteDetails_v4`
   - `/VehicleTripDetails_v2`
@@ -193,7 +196,7 @@ Accept: text/plain
       "responsecode": <int>
     },
     ...
-  ]
+  ],
   "Message": <string>,
   "Issuccess": <boolean>,
   "exception": null,
@@ -244,7 +247,7 @@ Accept: text/plain
       ]
     },
     ...
-  ]
+  ],
   "Message": <string>,
   "Issuccess": <boolean>,
   "exception": null,
@@ -255,8 +258,44 @@ Accept: text/plain
 
 ---
 
+### 3. 🚌 Get All Routes
 
-### 3. 💰 Get Fare Routes
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetAllRouteList`
+
+**Headers :**
+```http
+Accept: application/json, text/plain, */*
+```
+
+**Description :** Returns basic information about all 11,000+ operational routes (up / down lines are considered distinct)
+
+**Response :** 
+
+```
+{
+  "data": [
+    {
+      "routeid": <int>, // new routeid from /SearchByRouteDetails_v4
+      "routeno": <string>, // same routeno as other calls, except it specifies direction (Ex : "89-C UP")
+      "routename": <string>,
+      "fromstationid": <int>,
+      "fromstation": <string>,
+      "tostationid": <int>,
+      "tostation": <string>,
+      "responsecode": <int>
+    },
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 4. 💰 Get Fare Routes
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetFareRoutes`
 
@@ -310,7 +349,7 @@ Content-Type: application/json
 
 ---
 
-### 4. 💸 Get Fare Data
+### 5. 💸 Get Fare Data
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMobileFareData_v2`
 
@@ -323,7 +362,7 @@ lan: en
 ```
 {
   "routeno": <string>,
-  "routeid": <int>, // new routeid from /SearchByRouteId_v4
+  "routeid": <int>, // new routeid from /SearchByRouteDetails_v4
   "route_direction": <string>, // "Up" or "Down" (Must match routeid)
   "source_code": <string>,
   "destination_code": <string>
@@ -352,15 +391,23 @@ lan: en
 
 ---
 
-### 5. `/GetTimetableByStation_v4`
+### 6. `/GetTimetableByStation_v4`
 
 ---
 
-### 6. `/GetTimetableByRouteid_v3`
+### 7. `/GetTimetableByRouteid_v3`
 
 ---
 
-### 7. `/GetMapConfig`
+### 8. `/GetMapConfig`
+
+---
+
+### 9. `/GetAllServiceTypes`
+
+---
+
+### 10. `/GetHelplineData`
 
 ---
 
