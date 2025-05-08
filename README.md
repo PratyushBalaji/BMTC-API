@@ -216,13 +216,46 @@ Content-Type: application/json
 ```
 {
   "deviceType": "WEB",
-  "lan": "en"
+  "lan": <string> // one of "en" or "kd"
 }
 ```
 
 **Description :** Returns nearby facilities for stations.
 
-**Response :** 
+**Response :** JSON containing
+
+```
+{
+  "data": [
+    {
+      "stationname": <string>,
+      "distance": <string>,
+      "Arounds": [ // facilities around particular station
+        {
+          "type": <string>, // ATM, Hotel, Parking, etc
+          "typeid": <string>, // identifier for the facility type
+          "icon": <string>, // icon from https://bmtcmobileapi.karnataka.gov.in/StaticFiles/
+          "list": [ // list of facilities of this type near particular station
+            {
+              "name": <string>,
+              "latitude": <string>,
+              "longitude": <string>,
+              "distance": <string>
+            }
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
@@ -233,12 +266,31 @@ Content-Type: application/json
 **Body :**
 ```
 {
-  "routeid": <int>
+  "routeid": <int> // routeid here is the routeparentid returned from a /SearchRoute_v2 request
 }
 ```
 
-**Description :** Returns lat and long data in an array for stations on a bus route, in an order corresponding to `SearchByRouteDetails_v4`
+**Description :** Returns lat and long data for stations on a bus route, in an order corresponding to `SearchByRouteDetails_v4`. `routeid` is unique for the up and down line, so this data is unambiguous.
 
+**Response :** 
+
+```
+{
+  "data": [
+    {
+      "latitude": <string>,
+      "longitude": <string>,
+      "responsecode": <int>
+    },
+    ...
+  ]
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 ---
 
 ## 6. 🚐 List Vehicles by Substring
@@ -256,13 +308,32 @@ Accept: text/plain
 **Body :**
 ```
 {
-  "vehicleRegNo" : "KA57F2201",
-  "deviceType" : "WEB",
-  "lan" : "en"
+  "vehicleRegNo" : <input text>, // vehicle license plate
+  "deviceType" : "WEB"
 }
 ```
 
-**Description :** Find vehicles using part of the registration number.
+**Description :** Finds vehicles whose license plate contains the input text. Used for search autocomplete functionality.
+
+**Response :** JSON containing `data` array with entries for buses with `vehicleRegNo` as a substring of their license plate.
+
+```
+{
+  "data": [
+    {
+      "vehicleid": <int>, // vehicle identifier
+      "vehicleregno": <string>, // full license plate
+      "responsecode": <int>
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
@@ -273,11 +344,90 @@ Accept: text/plain
 **Body :**
 ```
 {
-  "vehicleId": 19285
+  "vehicleId": <int> // vehicleId from /ListVehicles
 }
 ```
 
 **Description :** Returns live vehicle tracking data.
+
+**Response :** JSON containing 
+
+```
+{
+  "RouteDetails": [ // lists info for each stop on the route
+    {
+      "rowid": <int>,
+      "tripid": <int>, // new identifier for this particular trip
+      "routeno": <string>,
+      "routename": <string>, // origin and terminus shortcode (Ex : KIA-KDG)
+      "busno": <string>, // vehicleregno from /LiveVehicles
+      "tripstatus": <string>, // usually "Running"
+      "tripstatusid": <string>,
+      "sourcestation": <string>,
+      "destinationstation": <string>,
+      "servicetype": <string>,
+      "webservicetype": <string>,
+      "servicetypeid": <int>,
+      "lastupdatedat": <string>, // query response timestamp (DD-MM-YYYY HH:MM:SS)
+      "stationname": <string>,
+      "stationid": <int>,
+      "actual_arrivaltime": <string>, // (HH:MM)
+      "etastatus": <string>, // original eta for stop (HH:MM)
+      "etastatusmapview": <string>, // eta to display on website (HH:MM)
+      "latitude": <float>,
+      "longitude": <float>,
+      "currentstop": <string>, // empty string if not currently stopped
+      "laststop": <string>,
+      "weblaststop": <string>, // stop name to display on website
+      "nextstop": <string>,
+      "currlatitude": <float>,
+      "currlongitude": <float>,
+      "sch_arrivaltime": <string>, // (HH:MM)
+      "sch_departuretime": <string>, // (HH:MM)
+      "eta": "", // eta (HH:MM), empty string is stop was passed
+      "actual_arrivaltime1": <string>, // (HH:MM) duplicate
+      "actual_departudetime": <string>, // (HH:MM) actually mispelled for some reason
+      "tripstarttime": <string>, // (HH:MM)
+      "tripendtime": <string>, // (HH:MM)
+      "routeid": <int>,
+      "vehicleid": <int>, // same as passed in body
+      "responsecode": <int>,
+      "lastreceiveddatetimeflag": <int>,
+      "srno": <int>,
+      "tripposition": <int>,
+      "stopstatus": <int>,
+      "stopstatus_distance": <int>, // always seems to return 999
+      "lastetaupdated": null,
+      "minstopstatus_distance": <float>
+    },
+    ...
+  ],
+  "LiveLocation": [
+    {
+      "latitude": <float>,
+      "longitude": <float>,
+      "location": <string>, // full address of vehicle current location
+      "lastrefreshon": <string>, // same as lastupdatedat (DD-MM-YYYY HH:MM:SS)
+      "nextstop": <string>,
+      "previousstop": <string>,
+      "vehicleid": <int>,
+      "vehiclenumber": <string>, // vehicleregno from /ListVehicles
+      "routeno": <string>,
+      "servicetypeid": <int>,
+      "servicetype": <string>,
+      "heading": <int>, // compass heading
+      "responsecode": <int>,
+      "trip_status": <int>,
+      "lastreceiveddatetimeflag": <int>
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
@@ -288,20 +438,50 @@ Accept: text/plain
 **Headers :**
 ```http
 Accept: application/json, text/plain, */*
-lan: English
 Content-Type: application/json
 ```
 
 **Body :**
 ```
 {
-  "fromStationId": 38642,
-  "toStationId": 38888,
-  "lan": "English"
+  "fromStationId": <int>,
+  "toStationId": <int>
 }
 ```
 
 **Description :** Returns all fare routes between two station IDs.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "id": <int>,
+      "fromstationid": <int>, // id of this specific route, not from body
+      "source_code": <string>,
+      "from_displayname": <string>,
+      "tostationid": <int>, // again id of this route, not from body
+      "destination_code": <string>,
+      "to_displayname": <string>,
+      "fromdistance": <float>,
+      "todistance": <float>,
+      "routeid": <int>, // this is the new id from /SearchByRouteDetails_v4
+      "routeno": <string>,
+      "routename": <string>, // origin and terminus shortcode (Ex : KIA-KDG)
+      "route_direction": <string>, // one of "Up" or "Down"
+      "fromstationname": <string>,
+      "tostationname": <string>
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
@@ -317,12 +497,30 @@ lan: en
 **Body :**
 ```
 {
-  "routeno": "335-E",
-  "routeid": 1701,
-  "route_direction": "Down",
-  "source_code": "KDB-1",
-  "destination_code": "KBS3"
+  "routeno": <string>,
+  "routeid": <int>, // new routeid from /SearchByRouteId_v4
+  "route_direction": <string>, // "Up" or "Down" (Must match routeid)
+  "source_code": <string>,
+  "destination_code": <string>
 }
 ```
 
 **Description :** Returns fare amount and service type for a given route and stop codes.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "servicetype": <string>, // NOT AC/Non AC, but instead the route type (Ex : "Bengaluru Sarige")
+      "fare": <string> // fare amount in rupees
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
