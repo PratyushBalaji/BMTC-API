@@ -22,15 +22,17 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
   - `/GetAllRouteList`
   - `/GetFareRoutes`
   - `/GetMobileFareData_v2`
-  - `/GetTimetableByStation_v4`
-  - `/GetTimetableByRouteid_v3`
-  - `/GetMapConfig`
-  - `/GetAllServiceTypes`
-  - `/GetHelplineData`
+  - `/GetTimetableByStation_v4` (INCOMPLETE)
+  - `/GetTimetableByRouteid_v3` (INCOMPLETE)
+  - `/GetMapConfig` (INCOMPLETE)
+  - `/GetAllServiceTypes` (INCOMPLETE)
+  - `/GetHelplineData` (INCOMPLETE)
+  - `/getWaypoints_v1` (MISSING / UNTESTED)
+  - `/GetPathDetails` (MISSING / UNTESTED)
 - [**Live**](#live)
   - `/SearchByRouteDetails_v4`
   - `/VehicleTripDetails_v2`
-  - `/TripPlannerMSMD`
+  - `/TripPlannerMSMD` (INCOMPLETE)
 
 ---
 
