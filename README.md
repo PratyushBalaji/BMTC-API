@@ -40,7 +40,7 @@ lan: en
 ```
 
 **Body :**
-```json
+```
 {
   "routetext": "<input text>"
 }
@@ -49,19 +49,19 @@ lan: en
 **Description :** Finds bus routes whose route number contains the input text. Used for search autocomplete functionality.
 
 **Response :** JSON containing `data` array with entries for bus routes with `routetext` as a substring.
-```json
+```
 {
   "data": [
     {
       "union_rowno": <int>,
       "row": <int>,
-      "routeno": "<string>",
+      "routeno": <string>,
       "responsecode": <int>,
       "routeparentid": <int>
     },
     ...
   ],
-  "Message": "<string>",
+  "Message": <string>,
   "Issuccess": <boolean>,
   "exception": null,
   "RowCount": <int>,
@@ -82,7 +82,7 @@ deviceType: WEB
 ```
 
 **Body :**
-```json
+```
 {
   "routeid": <int>, // routeid here is the routeparentid returned from a /SearchRoute_v2 request
   "servicetypeid": 0 // filter for AC or Non-AC/Ordinary bus routes (default 0 for no filter)
@@ -93,17 +93,17 @@ deviceType: WEB
 
 **Response :** JSON containing live `data` array with entries for each stop on the up and down route, and `mapData` array with entries for buses plying on the up and down route
 
-```json
+```
 {
   "up": {
     "data": [
       {
         "routeid": <int>, // NOT the same as the routeid passed in the body, this is a new unique identifier
         "stationid": <int>, // station id for each station on the route
-        "stationname": "<string>",
-        "from": "<string>", // bus route origin
-        "to": "<string>", // bus route destination
-        "routeno": "<string>", // routeno from /SearchRoute_v2
+        "stationname": <string>,
+        "from": <string>, // bus route origin
+        "to": <string>, // bus route destination
+        "routeno": <string>, // routeno from /SearchRoute_v2
         "distance_on_station": <int>,
         "centerlat": <float>, // station latitude coordinate
         "centerlong": <float>, // station longitude coordinate
@@ -112,18 +112,18 @@ deviceType: WEB
         "vehicleDetails": [ // details for all vehicles currently plying on the up route
           {
             "vehicleid": <int>, // vehicle identifier
-            "vehiclenumber": "<string>", // vehicle license plate
+            "vehiclenumber": <string>, // vehicle license plate
             "servicetypeid": <int>, // number indicating service type of this vehicle
-            "servicetype": "<string>", // string containing "AC" or "Non AC/Ordinary"
+            "servicetype": <string>, // string containing "AC" or "Non AC/Ordinary"
             "centerlat": <float>, // vehicle latitude coordinate
             "centerlong": <float>, // vehicle longitude coordinate
-            "eta": "<string>", // vehicle eta (YYYY-MM-DD HH:MM:SS), empty string if vehicle has already passed the station
-            "sch_arrivaltime": "<string>", // scheduled arrival time at the station (HH:MM)
+            "eta": <string>, // vehicle eta (YYYY-MM-DD HH:MM:SS), empty string if vehicle has already passed the station
+            "sch_arrivaltime": <string>, // scheduled arrival time at the station (HH:MM)
             "sch_departuretime": "<string", // scheduled departure time from the station (HH:MM)
             "actual_arrivaltime": "", // actual arrival time to the station (HH:MM), empty string if vehicle hasn't reached the station
             "actual_departuretime": "", // actual departure time from the station (HH:MM), empty string if vehicle hasn't left the station
-            "sch_tripstarttime": "<string>", // scheduled trip start time
-            "sch_tripendtime": "<string>", // scheduled trip end time
+            "sch_tripstarttime": <string>, // scheduled trip start time
+            "sch_tripendtime": <string>, // scheduled trip end time
             "lastlocationid": <int>,
             "currentlocationid": <int>, // station id for last departed station
             "nextlocationid": <int>,
@@ -132,7 +132,7 @@ deviceType: WEB
             "laststop": null,
             "stopCoveredStatus": <int>,
             "heading": <int>, // current compass heading of vehicle
-            "lastrefreshon": "<string>", // time data was collected (DD-MM-YYYY HH:MM:SS)
+            "lastrefreshon": <string>, // time data was collected (DD-MM-YYYY HH:MM:SS)
             "lastreceiveddatetimeflag": <int>,
             "tripposition": <int>
           }
@@ -151,7 +151,7 @@ deviceType: WEB
     "data": [...],
     "mapData": [...]
   },
-  "message": "<string>",
+  "message": <string>,
   "issuccess": <boolean>,
   "exception": null,
   "rowCount": <int>,
@@ -173,7 +173,7 @@ Content-Type: application/json
 ```
 
 **Body :**
-```json
+```
 {
   "stationName": "<input text>"
 }
@@ -183,7 +183,7 @@ Content-Type: application/json
 
 **Response :** JSON containing `data` array with entries for bus stops with `stationName` as a substring.
 
-```json
+```
 {
   "data": [
     {
@@ -199,7 +199,7 @@ Content-Type: application/json
     },
     ...
   ],
-  "Message": "<string>",
+  "Message": <string>,
   "Issuccess": <boolean>,
   "exception": null,
   "RowCount": <int>,
@@ -213,7 +213,7 @@ Content-Type: application/json
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/AroundBusStops_v2_Webportal`
 
 **Body :**
-```json
+```
 {
   "deviceType": "WEB",
   "lan": "en"
@@ -231,7 +231,7 @@ Content-Type: application/json
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/RoutePoints`
 
 **Body :**
-```json
+```
 {
   "routeid": <int>
 }
@@ -254,7 +254,7 @@ Accept: text/plain
 ```
 
 **Body :**
-```json
+```
 {
   "vehicleRegNo" : "KA57F2201",
   "deviceType" : "WEB",
@@ -271,7 +271,7 @@ Accept: text/plain
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/VehicleTripDetails_v2`
 
 **Body :**
-```json
+```
 {
   "vehicleId": 19285
 }
@@ -293,7 +293,7 @@ Content-Type: application/json
 ```
 
 **Body :**
-```json
+```
 {
   "fromStationId": 38642,
   "toStationId": 38888,
@@ -315,7 +315,7 @@ lan: en
 ```
 
 **Body :**
-```json
+```
 {
   "routeno": "335-E",
   "routeid": 1701,
