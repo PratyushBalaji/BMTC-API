@@ -3,7 +3,7 @@
 
 This is work-in-progress documentation for the publicly accessible BMTC APIs. I've tried to reverse-engineer it by analysing network traffic on [the BMTC website](https://nammabmtcapp.karnataka.gov.in/commuter/dashboard).
 
-Made with the help of the [Bruno API Client](https://www.usebruno.com/) and existing documentation([Swagger](https://nimmbus.netlify.app/), [GitHub](https://github.com/Vonter/open-bmtc)) by seadeep42 and Vonter on GitHub
+Made with the help of the [Bruno API Client](https://www.usebruno.com/) and existing documentation ([Swagger](https://nimmbus.netlify.app/), [GitHub](https://github.com/Vonter/open-bmtc)) by seadeep42 and Vonter on GitHub
 
 ---
 
