@@ -413,6 +413,72 @@ lan: en
 
 ---
 
+### 11. `/getWaypoints_v1`
+
+---
+
+### 12. `/GetPathDetails`
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetPathDetails`
+
+**Headers :**
+
+```http
+Content-Type: application/json
+lan: en
+deviceType: WEB
+```
+
+**Body :**
+
+```
+{
+  "data": [
+    {
+      "fromStationId": <int>, // station ID from trip
+      "toStationId": <int>,   // station ID from trip
+      "tripId": <int>         // trip ID from /VehicleTripDetails_v2
+    }
+  ]
+}
+```
+
+**Description :** Returns all intermediate stops, lat/lon, and scheduled times between two stations along a live bus trip. Used to retrieve the path segment of an ongoing trip.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "actual_arrivaltime": <string>,
+      "actual_departuretime": <string>,
+      "distance": <float>,
+      "duration": null,
+      "eta": <string>,
+      "isTransfer": <boolean>, // always false for direct segments
+      "latitude": <float>,
+      "longitude": <float>,
+      "routeId": <int>, // route ID of this trip segment
+      "routeNo": <string>, // route number with direction (e.g. "600-F BSK-D32")
+      "sch_arrivaltime": <string>, // scheduled arrival time (DD/MM/YYYY HH:MM:SS)
+      "sch_departuretime": <string>, // scheduled departure time (DD/MM/YYYY HH:MM:SS)
+      "stationId": <int>,
+      "stationName": <string>,
+      "tripId": <int>
+    },
+    ...
+  ],
+  "exception": null,
+  "issuccess": <boolean>,
+  "message": <string>,
+  "responsecode": <int>,
+  "rowCount": <int>
+}
+```
+
+---
+
 ## Live
 
 ### 1. 🚏 Find Stations by Route
