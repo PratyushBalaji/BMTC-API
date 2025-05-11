@@ -25,7 +25,7 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
   - `/GetTimetableByStation_v4`
   - `/GetTimetableByRouteid_v3`
   - `/getWaypoints_v1` (MISSING / UNTESTED)
-  - `/GetPathDetails` (MISSING / UNTESTED)
+  - `/GetPathDetails`
 - [**Live**](#live)
   - `/SearchByRouteDetails_v4`
   - `/VehicleTripDetails_v2`
