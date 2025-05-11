@@ -393,7 +393,66 @@ lan: en
 
 ---
 
-### 6. `/GetTimetableByStation_v4`
+### 6. 🕓 Get Timetable Between Two Stops
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetTimetableByStation_v4`
+
+**Headers :**
+
+```http
+lan: en
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+```
+
+**Body :**
+
+```
+{
+  "fromStationId": <int>, // source station ID
+  "toStationId": <int>, // destination station ID
+  "p_startdate": "<string>", // start date-time (YYYY-MM-DD HH:MM)
+  "p_enddate": "<string>", // end date-time (YYYY-MM-DD HH:MM)
+  "p_isshortesttime": 2,
+  "p_routeid": "",
+  "p_date": "<string>" // usually same as p_startdate, but can be anything
+}
+```
+
+**Description :** Returns scheduled bus trip times between two stations over a given time interval on the same day. Each entry corresponds to a unique route between the two stops.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "routeid": <int>, // route identifier
+      "id": <int>,
+      "fromstationid": <int>, // source station ID
+      "tostationid": <int>, // destination station ID
+      "routeno": <string>, // route number (e.g., "335-E")
+      "routename": <string>, // route name (e.g., "KDG-KBS")
+      "fromstationname": <string>, // source station name
+      "tostationname": <string>, // destination station name
+      "traveltime": <string>, // total travel time (HH:MM:SS)
+      "distance": <float>, // total trip distance
+      "apptime": <string>, // approximate time (usually same as traveltime)
+      "apptimesecs": <string>, // travel time in seconds (as string)
+      "starttime": <string>, // departure time from source stop (HH:MM:SS)
+      "platformname": null,
+      "platformnumber": null,
+      "baynumber": null
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
