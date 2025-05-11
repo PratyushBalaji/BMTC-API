@@ -39,6 +39,10 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
 
 ## Search Functionality
 
+API calls used mainly for search suggestions in textboxes when searching for routes, bus stops, or buses, to ensure data validity.
+
+---
+
 ### 1. 🔍 Search Routes
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/SearchRoute_v2`
@@ -174,6 +178,10 @@ Accept: text/plain
 ---
 
 ## Static
+
+API calls that return static / infrequently changing data such as bus routes, station coordinates, facilities, fares, timetables, etc.
+
+---
 
 ### 1. 🧭 Route Points
 
@@ -522,7 +530,7 @@ Content-Type: application/json
 
 ---
 
-### 9. `/GetPathDetails`
+### 9. 📍 Get Path Details Between Two Stations
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetPathDetails`
 
@@ -585,6 +593,10 @@ deviceType: WEB
 ---
 
 ## Live
+
+API calls that return live, frequently changing data, such as live coordinates for individual buses / all buses currently plying on a route.
+
+---
 
 ### 1. 🚏 Find Stations by Route
 
@@ -775,6 +787,10 @@ deviceType: WEB
 ---
 
 ## Misc (Frontend)
+
+Miscellaneous data used mainly for frontend information, such as Google Maps API keys, up-to-date service types, or phone numbers. 
+
+---
 
 ### 1. 🗺️ Get Map Config
 
