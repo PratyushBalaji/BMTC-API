@@ -1,4 +1,4 @@
-agency_id,route_color,route_desc,route_id,route_long_name,route_short_name,route_text_color,route_type,route_url
+agency_id,route_color,route_desc,route_id,route_long_name,route_short_name,route_text_color,route_type,route_url,t
 BMTC,FFFFFF,,327H,"Krishnarajendra Market - Kamanahalli",BR1645,000000,3,,
 BMTC,FFFFFF,,327K,"Kempegowda Bus Station - Sarjapura Bus Stand",BR1646,000000,3,,
 BMTC,FFFFFF,,295A,"Kempegowda Bus Station - Dodda Gubbi",BR1284,000000,3,,
