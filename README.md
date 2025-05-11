@@ -22,8 +22,8 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
   - `/GetAllRouteList`
   - `/GetFareRoutes`
   - `/GetMobileFareData_v2`
-  - `/GetTimetableByStation_v4` (INCOMPLETE)
-  - `/GetTimetableByRouteid_v3` (INCOMPLETE)
+  - `/GetTimetableByStation_v4`
+  - `/GetTimetableByRouteid_v3`
   - `/GetMapConfig` (INCOMPLETE)
   - `/GetAllServiceTypes` (INCOMPLETE)
   - `/GetHelplineData` (INCOMPLETE)
@@ -436,7 +436,7 @@ Content-Type: application/json
       "fromstationname": <string>, // source station name
       "tostationname": <string>, // destination station name
       "traveltime": <string>, // total travel time (HH:MM:SS)
-      "distance": <float>, // total trip distance
+      "distance": <float>, // total trip distance (km)
       "apptime": <string>, // approximate time (usually same as traveltime)
       "apptimesecs": <string>, // travel time in seconds (as string)
       "starttime": <string>, // departure time from source stop (HH:MM:SS)
@@ -456,7 +456,64 @@ Content-Type: application/json
 
 ---
 
-### 7. `/GetTimetableByRouteid_v3`
+### 7. 📅 Get Timetable by Route ID
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetTimetableByRouteId_v3`
+
+**Headers :**
+
+```http
+lan: en
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+```
+
+**Body :**
+
+```
+{
+  "current_date": "<string>", // ISO 8601 date-time (e.g., "2025-05-05T18:30:00.000Z")
+  "routeid": <int>, // route ID from /SearchByRouteDetails_v4
+  "fromStationId": <int>, // source station ID
+  "toStationId": <int>, // destination station ID
+  "starttime": "<string>", // search start time (YYYY-MM-DD HH:MM)
+  "endtime": "<string>" // search end time (YYYY-MM-DD HH:MM)
+}
+```
+
+**Description :** Returns all scheduled trip times for a given route between a specified source and destination stop, within a specific time window.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "fromstationname": <string>, // source stop name
+      "tostationname": <string>, // destination stop name
+      "fromstationid": <string>, // source stop ID (as string)
+      "tostationid": <string>, // destination stop ID (as string)
+      "apptime": <string>, // approximate travel time (HH:MM:SS)
+      "distance": <string>, // total trip distance (km)
+      "platformname": null,
+      "platformnumber": null,
+      "baynumber": null,
+      "tripdetails": [ // list of scheduled trip times between starttime and endtime in body
+        {
+          "starttime": <string>, // departure time from source stop (HH:MM)
+          "endtime": <string> // arrival time at destination stop (HH:MM)
+        },
+        ...
+      ]
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
