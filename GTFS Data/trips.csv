@@ -1,4 +1,4 @@
-bikes_allowed,block_id,direction_id,route_id,service_id,shape_id,trip_headsign,trip_id,trip_short_name,wheelchair_accessible
+bikes_allowed,block_id,direction_id,route_id,service_id,shape_id,trip_headsign,trip_id,trip_short_name,wheelchair_accessible,t
 ,,1,V-360B,FULLW,,,V-360B-1-14956,,,
 ,,1,210CD,FULLW,,,210CD-1-1732,,,
 ,,1,V-360B,FULLW,,,V-360B-1-14957,,,
