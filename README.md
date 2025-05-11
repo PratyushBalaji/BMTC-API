@@ -26,14 +26,14 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
   - `/GetTimetableByRouteid_v3`
   - `/getWaypoints_v1` (MISSING / UNTESTED)
   - `/GetPathDetails` (MISSING / UNTESTED)
-- [**Misc**](#misc-frontend)
-  - `/GetMapConfig`
-  - `/GetAllServiceTypes` (INCOMPLETE)
-  - `/GetHelplineData` (INCOMPLETE)
 - [**Live**](#live)
   - `/SearchByRouteDetails_v4`
   - `/VehicleTripDetails_v2`
   - `/TripPlannerMSMD` (INCOMPLETE)
+- [**Misc**](#misc-frontend)
+  - `/GetMapConfig`
+  - `/GetAllServiceTypes` (INCOMPLETE)
+  - `/GetHelplineData` (INCOMPLETE)
 
 ---
 
@@ -584,50 +584,6 @@ deviceType: WEB
 
 ---
 
-## Misc (Frontend)
-
-### 1. 🗺️ Get Map Config
-
-**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMapConfig`
-
-**Headers :**
-
-```http
-lan: en
-Accept: application/json, text/plain, */*
-```
-
-**Body :** None required
-
-**Description :** Returns configuration data for maps used by the BMTC web/Android applications. Most notably, this includes the public Google Maps API key used by the frontend.
-
-**Response :**
-
-```
-{
-  "data": [
-    {
-      "api_key": <string> // Google Maps API key used by BMTC apps
-    }
-  ],
-  "Message": <string>,
-  "Issuccess": <boolean>,
-  "exception": null,
-  "RowCount": <int>,
-  "responsecode": <int>
-}
-```
-
----
-
-### 2. `/GetAllServiceTypes`
-
----
-
-### 3. `/GetHelplineData`
-
----
-
 ## Live
 
 ### 1. 🚏 Find Stations by Route
@@ -815,5 +771,49 @@ deviceType: WEB
 ---
 
 ### 3. `/TripPlannerMSMD`
+
+---
+
+## Misc (Frontend)
+
+### 1. 🗺️ Get Map Config
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMapConfig`
+
+**Headers :**
+
+```http
+lan: en
+Accept: application/json, text/plain, */*
+```
+
+**Body :** None required
+
+**Description :** Returns configuration data for maps used by the BMTC web/Android applications. This includes the public Google Maps API key used by the frontend.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "api_key": <string> // Google Maps API key used by BMTC apps
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 2. `/GetAllServiceTypes`
+
+---
+
+### 3. `/GetHelplineData`
 
 ---
