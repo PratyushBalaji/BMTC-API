@@ -826,10 +826,69 @@ Accept: application/json, text/plain, */*
 
 ---
 
-### 2. `/GetAllServiceTypes`
+### 2. 🧾 Get All Service Types
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetAllServiceTypes`
+
+**Headers :** None required
+
+**Body :** None required
+
+**Description :** Returns the list of available BMTC service types, including AC and Non AC categories, along with their corresponding identifiers used in other API calls.
+
+**Response :**
+```
+{
+  "data": [
+    {
+      "servicetype": <string>, // "AC" or "Non AC/Ordinary"
+      "servicetypeid": <int>, // numerical ID used in route-related APIs
+      "responsecode": <int>
+    },
+    ...
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
 
 ---
 
-### 3. `/GetHelplineData`
+### 3. ☎️ Get Helpline Data
 
----
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetHelplineData`
+
+**Headers :** None required
+
+**Body :**
+
+```
+{
+  "lan": <string> // en for english, kd for kannada
+}
+```
+
+**Description :** Returns the official BMTC helpline number for customer support or complaints.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "labelname": <string>, // label describing the helpline ("BMTC Helpline No")
+      "busstopname": null,
+      "helplinenumber": <string>, // BMTC's public helpline number, country code (omitted) : +91 (India)
+      "responsecode": <int>
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
