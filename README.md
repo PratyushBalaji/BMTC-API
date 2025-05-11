@@ -24,11 +24,12 @@ Made with the help of the [Bruno API Client](https://www.usebruno.com/) and exis
   - `/GetMobileFareData_v2`
   - `/GetTimetableByStation_v4`
   - `/GetTimetableByRouteid_v3`
-  - `/GetMapConfig` (INCOMPLETE)
-  - `/GetAllServiceTypes` (INCOMPLETE)
-  - `/GetHelplineData` (INCOMPLETE)
   - `/getWaypoints_v1` (MISSING / UNTESTED)
   - `/GetPathDetails` (MISSING / UNTESTED)
+- [**Misc**](#misc-frontend)
+  - `/GetMapConfig`
+  - `/GetAllServiceTypes` (INCOMPLETE)
+  - `/GetHelplineData` (INCOMPLETE)
 - [**Live**](#live)
   - `/SearchByRouteDetails_v4`
   - `/VehicleTripDetails_v2`
@@ -517,23 +518,11 @@ Content-Type: application/json
 
 ---
 
-### 8. `/GetMapConfig`
+### 8. `/getWaypoints_v1`
 
 ---
 
-### 9. `/GetAllServiceTypes`
-
----
-
-### 10. `/GetHelplineData`
-
----
-
-### 11. `/getWaypoints_v1`
-
----
-
-### 12. `/GetPathDetails`
+### 9. `/GetPathDetails`
 
 **POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetPathDetails`
 
@@ -592,6 +581,50 @@ deviceType: WEB
   "rowCount": <int>
 }
 ```
+
+---
+
+## Misc (Frontend)
+
+### 1. 🗺️ Get Map Config
+
+**POST** `https://bmtcmobileapi.karnataka.gov.in/WebAPI/GetMapConfig`
+
+**Headers :**
+
+```http
+lan: en
+Accept: application/json, text/plain, */*
+```
+
+**Body :** None required
+
+**Description :** Returns configuration data for maps used by the BMTC web/Android applications. Most notably, this includes the public Google Maps API key used by the frontend.
+
+**Response :**
+
+```
+{
+  "data": [
+    {
+      "api_key": <string> // Google Maps API key used by BMTC apps
+    }
+  ],
+  "Message": <string>,
+  "Issuccess": <boolean>,
+  "exception": null,
+  "RowCount": <int>,
+  "responsecode": <int>
+}
+```
+
+---
+
+### 2. `/GetAllServiceTypes`
+
+---
+
+### 3. `/GetHelplineData`
 
 ---
 
