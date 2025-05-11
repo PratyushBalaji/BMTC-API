@@ -1,4 +1,4 @@
-﻿location_type,parent_station,stop_code,stop_desc,stop_id,stop_lat,stop_lon,stop_name,stop_timezone,stop_url,wheelchair_boarding,zone_id
+﻿location_type,parent_station,stop_code,stop_desc,stop_id,stop_lat,stop_lon,stop_name,stop_timezone,stop_url,wheelchair_boarding,zone_id,t
 ,,,"",3280,13.0102899391,77.5839466788,"Palace Ground",,,,,
 ,,,"",3282,12.9679567997,77.59154125772,"Pallavi Talkies",,,,,
 ,,,"",3281,13.1168614208569,77.6083756888998,"Palanahalli Gate",,,,,
