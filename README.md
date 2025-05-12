@@ -5,6 +5,11 @@ This is work-in-progress documentation for the publicly accessible BMTC APIs. I'
 
 Made with the help of the [Bruno API Client](https://www.usebruno.com/) and existing documentation ([Swagger](https://nimmbus.netlify.app/), [GitHub](https://github.com/Vonter/open-bmtc)) by seadeep42 and Vonter on GitHub
 
+**Disclaimer**
+This project is intended strictly for educational and informational purposes. The data and API usage demonstrated here are meant solely to help understand how BMTC services function and retrieve data. Any use of this information in personal or public applications may place unintended load on BMTC servers and disrupt official services.
+
+**I do not accept any responsibility or liability for consequences arising from the misuse of this data or API. Use at your own discretion and respect the intended limits of the service.**
+
 ---
 
 ## API Details
