@@ -42,8 +42,8 @@ This project is intended **strictly** for **educational and informational purpos
   - `/TripPlannerMSMD` (INCOMPLETE)
 - [**Misc**](#misc-frontend)
   - `/GetMapConfig`
-  - `/GetAllServiceTypes` (INCOMPLETE)
-  - `/GetHelplineData` (INCOMPLETE)
+  - `/GetAllServiceTypes`
+  - `/GetHelplineData`
 
 ---
 
