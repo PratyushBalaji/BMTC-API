@@ -7,6 +7,8 @@ This is work-in-progress documentation for the publicly accessible BMTC APIs. I'
 
 Made with the help of the [Bruno API Client](https://www.usebruno.com/) and existing documentation ([Swagger](https://nimmbus.netlify.app/), [GitHub](https://github.com/Vonter/open-bmtc)) by seadeep42 and Vonter on GitHub
 
+I am also working on using this data to build an LED matrix that visualises live bus routes as they travel through the city. That project can be found [here](https://github.com/PratyushBalaji/BMTC-Visualisation).
+
 ---
 
 ## Disclaimer
